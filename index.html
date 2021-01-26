@@ -14,7 +14,60 @@
 </head>
 <body>
 <main class="page">
-    <div class="content">
+<div class="popup-callback-bg popup-bg">
+    <div class="popup-callback popup">
+        <div class="popup-callback__back">
+            <img src="img/callback-bg-mask.png" alt="">
+            <img src="img/callback-bg.png" alt="">
+        </div>
+        <div class="popup-callback__close popup-close">
+            <picture>
+                <source srcset="img/cancel-black.svg" media="(max-width: 767px)">
+                <img src="img/cancel-white.svg" alt="">
+            </picture>
+        </div>
+        <form action="#" class="popup-callback__form form">
+            <p class="popup-callback__title">Отправить заявку</p>
+            <div class="popup-callback__block">
+                <label for="name">Имя</label>
+                <input id="name" type="text" placeholder="Алиса" class="_req">
+                <span>Поле заполнено неверно!</span>
+            </div>
+            <div class="popup-callback__block">
+                <label for="phone">Телефон</label>
+                <input id="phone" type="tel" placeholder="+7 (000) 000-00-00" class="_req _phone">
+                <span>Поле заполнено неверно!</span>
+            </div>
+            <div class="popup-callback__block">
+                <label for="mail">Электронная почта</label>
+                <input id="mail" type="email" placeholder="example@mail.ru" class="_req">
+                <span>Поле заполнено неверно!</span>
+            </div>
+            <button class="button" type="submit">Отправить заявку</button>
+        </form>
+    </div>
+</div>
+
+<div class="popup-thanks-bg popup-bg">
+    <div class="popup-thanks popup">
+        <div class="popup-thanks__back">
+            <img src="img/callback-bg-mask.png" alt="">
+            <img src="img/callback-bg.png" alt="">
+        </div>
+        <div class="popup-thanks__close popup-close">
+            <picture>
+                <source srcset="img/cancel-black.svg" media="(max-width: 767px)">
+                <img src="img/cancel-white.svg" alt="">
+            </picture>
+        </div>
+        <div class="popup-thanks__img">
+            <img src="img/thanks.png" alt="">
+        </div>
+        <div class="popup-thanks__title">Ваша заявка принята!</div>
+        <div class="popup-thanks__subtitle">Наши эксперты свяжутся с вами в ближайшее время</div>
+        <button class="button popup-thanks__close">Отлично!</button>
+    </div>
+</div>    <div class="content">
 <header class="header">
     <div class="header__row container">
         <div class="header__logo">
@@ -59,10 +112,10 @@
 </header>        <section class="main-screen">
             <div class="main-screen__main container">
                 <h1 class="main-screen__title">Платформа оптовых закупок<br>для&nbsp;дистрибьюторов HoReCa</h1>
-                <button class="button">Отправить заявку</button>
+                <button class="button popup-callback-open-btn">Отправить заявку</button>
             </div>
         </section>
-        <section class="product">
+        <section class="product toScroll">
             <div class="container">
                 <div class="product__images">
                     <img src="img/product/product-big.jpg" alt="" class="product__image-big">
@@ -102,7 +155,7 @@
                 </div>
             </div>
         </section>
-        <section class="conditions">
+        <section class="conditions toScroll">
             <div class="conditions__main container">
                 <h2 class="conditions__title">Условия подключения к платформе:</h2>
                 <div class="conditions__block">
@@ -125,7 +178,7 @@
                 </div>
             </div>
         </section>
-        <section class="advantages">
+        <section class="advantages toScroll">
             <div class="container">
                 <h2 class="title">Наши преимущества:</h2>
                 <div class="advantages__items">
@@ -160,7 +213,7 @@
                 </div>
             </div>
         </section>
-        <section class="benefit">
+        <section class="benefit toScroll">
             <div class="container">
                 <h2 class="title">Что вы получите:</h2>
                 <div class="benefit__items">
@@ -178,7 +231,7 @@
                                     <li>Увидите статистику и цены конкурентов</li>
                                 </ul>
                             </div>
-                            <button class="button">Отправить заявку</button>
+                            <button class="button popup-callback-open-btn">Отправить заявку</button>
                         </div>
                     </article>
                     <article class="benefit__item">
@@ -197,7 +250,7 @@
                                     <li>Узнаете про новинки и получите образцы продукции</li>
                                 </ul>
                             </div>
-                            <button class="button">Отправить заявку</button>
+                            <button class="button popup-callback-open-btn">Отправить заявку</button>
                         </div>
                     </article>
                 </div>
@@ -225,13 +278,11 @@
                             <p>Решение вопросов по заказу онлайн</p>
                         </article>
                     </div>
-                    <div class="capabilities__arrows">
-                        <div class="capabilities__arrow capabilities__arrow_prev">
-                            <img src="img/chevron_right.svg" alt="Назад">
-                        </div>
-                        <div class="capabilities__arrow capabilities__arrow_next">
-                            <img src="img/chevron_right.svg" alt="Вперед">
-                        </div>
+                    <div class="capabilities__arrow capabilities__arrow_prev">
+                        <img src="img/chevron_right.svg" alt="Назад">
+                    </div>
+                    <div class="capabilities__arrow capabilities__arrow_next">
+                        <img src="img/chevron_right.svg" alt="Вперед">
                     </div>
                 </div>
             </div>
@@ -239,7 +290,7 @@
     </div>
 <footer class="footer">
     <div class="container">
-        <div class="footer__column toScroll">
+        <div class="footer__column">
             <p class="footer__title">GFC-russia.ru</p>
             <p class="footer__content"><span>Адрес:</span> индекс&nbsp;123022, г.&nbsp;Москва, ул.&nbsp;Рочдельская, д.&nbsp;15, стр.&nbsp;16, помещение&nbsp;I, офис&nbsp;1</p>
             <p class="footer__content">GFC в социальных сетях</p>

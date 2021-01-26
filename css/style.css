@@ -856,6 +856,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   -webkit-user-select: none;
           user-select: none;
+  cursor: default;
 }
 @media (max-width: 860px) {
   .advantages__item:last-of-type {

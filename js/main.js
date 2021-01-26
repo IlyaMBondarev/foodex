@@ -165,24 +165,31 @@ if ($('.benefit').length) {
     let rotatingBlocksParent = document.querySelector('.benefit');
     let rotatingBlocks = rotatingBlocksParent.querySelectorAll('.benefit__item');
 
-    rotatingBlocks.forEach(block => {
-        block.addEventListener('click', () => {
-            block.classList.add('benefit__item-active');
-        })
-    })
-    document.addEventListener('click', (event) => {
+    let _loop = function _loop(i) {
+        rotatingBlocks[i].addEventListener('click', function () {
+            rotatingBlocks[i].classList.add('benefit__item-active');
+        });
+    };
+
+    for (let i = 0; i < rotatingBlocks.length; i++) {
+        _loop(i);
+    }
+
+    document.addEventListener('click', function (event) {
         let isOnBlocks = false;
-        rotatingBlocks.forEach(block => {
-            if (block.contains(event.target) || block === event.target) {
+
+        for (let _i = 0; _i < rotatingBlocks.length; _i++) {
+            if (rotatingBlocks[_i].contains(event.target) || rotatingBlocks[_i] === event.target) {
                 isOnBlocks = true;
             }
-        })
-        if (!isOnBlocks) {
-            rotatingBlocks.forEach(block => {
-                block.classList.remove('benefit__item-active');
-            })
         }
-    })
+
+        if (!isOnBlocks) {
+            for (let _i2 = 0; _i2 < rotatingBlocks.length; _i2++) {
+                rotatingBlocks[_i2].classList.remove('benefit__item-active');
+            }
+        }
+    });
 }
 
 //двигающиеся блоки
@@ -190,39 +197,47 @@ if ($('.benefit').length) {
 
 if ($('.advantages').length) {
     let items = document.querySelector('.advantages').querySelectorAll('.advantages__item');
-    items.forEach(item => {
-        let image = item.querySelector('img');
-        let x,y;
-        item.addEventListener('mouseenter', (event) => {
-            let heightOfItem = item.offsetHeight;
-            let widthOfItem = item.offsetWidth;
-            let xPossible = (image.scrollWidth - widthOfItem)/2;
-            let yPossible = (image.scrollHeight - heightOfItem)/2;
+
+    let _loop = function _loop(i) {
+        let image = items[i].querySelector('img');
+        let x = void 0,
+            y = void 0;
+        items[i].addEventListener('mouseenter', function (event) {
+            let heightOfItem = items[i].offsetHeight;
+            let widthOfItem = items[i].offsetWidth;
+            let xPossible = (image.scrollWidth - widthOfItem) / 2;
+            let yPossible = (image.scrollHeight - heightOfItem) / 2;
+
             if (document.documentElement.scrollWidth > 767) {
-                x = event.pageX - item.offsetLeft;
-                y = event.pageY - item.offsetTop;
-                image.style.transform = `translate(-50%,-50%) translate(${((widthOfItem/2)-x)*xPossible/(widthOfItem/2)}px,${((heightOfItem/2)-y)*yPossible/(heightOfItem/2)}px)`;
-                setTimeout(()=>{
-                    image.style.transition = 'transform 0.1s ease';
-                },200)
+                x = event.pageX - items[i].offsetLeft;
+                y = event.pageY - items[i].offsetTop;
+                image.style.transform = "translate(-50%,-50%) translate(".concat((widthOfItem / 2 - x) * xPossible / (widthOfItem / 2), "px,").concat((heightOfItem / 2 - y) * yPossible / (heightOfItem / 2), "px)");
+                setTimeout(function () {
+                    image.style.transition = 'transform 0.05s ease';
+                }, 200);
             }
-        })
-        item.addEventListener('mousemove', (event) => {
-            let heightOfItem = item.offsetHeight;
-            let widthOfItem = item.offsetWidth;
-            let xPossible = (image.scrollWidth - widthOfItem)/2;
-            let yPossible = (image.scrollHeight - heightOfItem)/2;
+        });
+        items[i].addEventListener('mousemove', function (event) {
+            let heightOfItem = items[i].offsetHeight;
+            let widthOfItem = items[i].offsetWidth;
+            let xPossible = (image.scrollWidth - widthOfItem) / 2;
+            let yPossible = (image.scrollHeight - heightOfItem) / 2;
+
             if (document.documentElement.scrollWidth > 767) {
-                x = event.pageX - item.offsetLeft;
-                y = event.pageY - item.offsetTop;
-                image.style.transform = `translate(-50%,-50%) translate(${((widthOfItem/2)-x)*xPossible/(widthOfItem/2)}px,${((heightOfItem/2)-y)*yPossible/(heightOfItem/2)}px)`;
+                x = event.pageX - items[i].offsetLeft;
+                y = event.pageY - items[i].offsetTop;
+                image.style.transform = "translate(-50%,-50%) translate(".concat((widthOfItem / 2 - x) * xPossible / (widthOfItem / 2), "px,").concat((heightOfItem / 2 - y) * yPossible / (heightOfItem / 2), "px)");
             }
-        })
-        item.addEventListener('mouseleave', () => {
+        });
+        items[i].addEventListener('mouseleave', function () {
             image.style.transition = 'transform 0.2s ease';
             image.style.transform = 'translate(-50%,-50%)';
-        })
-    })
+        });
+    };
+
+    for (let i = 0; i < items.length; i++) {
+        _loop(i);
+    }
 }
 //карусель-слайдер на странице услуги
 

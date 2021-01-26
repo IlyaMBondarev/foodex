@@ -44,7 +44,7 @@ for (let i = 0; i < lists.length; i++) {
         });
     };
 
-    for (let i = 0; i < links.length; i++) {
+    for (let i = 0; i < links.length - 1; i++) {
         _loop(i);
     }
 }
@@ -182,6 +182,46 @@ if ($('.benefit').length) {
                 block.classList.remove('benefit__item-active');
             })
         }
+    })
+}
+
+//двигающиеся блоки
+
+
+if ($('.advantages').length) {
+    let items = document.querySelector('.advantages').querySelectorAll('.advantages__item');
+    items.forEach(item => {
+        let image = item.querySelector('img');
+        let x,y;
+        item.addEventListener('mouseenter', (event) => {
+            let heightOfItem = item.offsetHeight;
+            let widthOfItem = item.offsetWidth;
+            let xPossible = (image.scrollWidth - widthOfItem)/2;
+            let yPossible = (image.scrollHeight - heightOfItem)/2;
+            if (document.documentElement.scrollWidth > 767) {
+                x = event.pageX - item.offsetLeft;
+                y = event.pageY - item.offsetTop;
+                image.style.transform = `translate(-50%,-50%) translate(${((widthOfItem/2)-x)*xPossible/(widthOfItem/2)}px,${((heightOfItem/2)-y)*yPossible/(heightOfItem/2)}px)`;
+                setTimeout(()=>{
+                    image.style.transition = 'transform 0.1s ease';
+                },200)
+            }
+        })
+        item.addEventListener('mousemove', (event) => {
+            let heightOfItem = item.offsetHeight;
+            let widthOfItem = item.offsetWidth;
+            let xPossible = (image.scrollWidth - widthOfItem)/2;
+            let yPossible = (image.scrollHeight - heightOfItem)/2;
+            if (document.documentElement.scrollWidth > 767) {
+                x = event.pageX - item.offsetLeft;
+                y = event.pageY - item.offsetTop;
+                image.style.transform = `translate(-50%,-50%) translate(${((widthOfItem/2)-x)*xPossible/(widthOfItem/2)}px,${((heightOfItem/2)-y)*yPossible/(heightOfItem/2)}px)`;
+            }
+        })
+        item.addEventListener('mouseleave', () => {
+            image.style.transition = 'transform 0.2s ease';
+            image.style.transform = 'translate(-50%,-50%)';
+        })
     })
 }
 //карусель-слайдер на странице услуги

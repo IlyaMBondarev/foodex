@@ -27,6 +27,16 @@
   width: 100%;
 }
 
+.hidden {
+  opacity: 0;
+  transition: opacity 0s;
+}
+
+.visible {
+  transition: opacity 1s ease;
+  opacity: 1;
+}
+
 .container {
   max-width: 1250px;
   padding: 0 15px;
@@ -857,7 +867,8 @@ h1, h2, h3, h4, h5, h6 {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  height: 100%;
+  transition: transform 0.2s ease;
+  height: 110%;
 }
 @media (max-width: 860px) {
   .advantages__item {
@@ -867,7 +878,7 @@ h1, h2, h3, h4, h5, h6 {
     min-width: 290px;
   }
   .advantages__item > img {
-    width: 100%;
+    width: 110%;
     height: auto;
   }
 }
@@ -905,7 +916,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 .advantages__item_big > img {
-  width: 100%;
+  width: 110%;
   height: auto;
 }
 

@@ -1,6 +1,26 @@
 
 document.querySelector('.page').classList.add('loaded');
 
+//замена шрифта шапки при скролле
+
+let header = document.querySelector('.header');
+let headerMenu = header.querySelector('.header__menu').querySelectorAll('a');
+let mainScreen = document.querySelector('.main-screen');
+let conditions = document.querySelector('.conditions');
+
+function changeHeader() {
+    if (mainScreen.offsetTop + mainScreen.offsetHeight > document.documentElement.scrollTop + header.scrollHeight/2 ||
+        (conditions.offsetTop + conditions.offsetHeight > document.documentElement.scrollTop + header.scrollHeight/2 && conditions.offsetTop < document.documentElement.scrollTop + header.scrollHeight/2)) {
+        headerMenu.forEach(link => link.style.color = '#ffffff');
+    } else {
+        headerMenu.forEach(link => link.style.color = '#000000');
+    }
+}
+
+changeHeader();
+
+//появление элементов при скролле
+
 let burgerInput = document.getElementById('burger');
 let lists = document.querySelector('.header').querySelectorAll('ul');
 let toScroll = document.querySelectorAll('.toScroll');
@@ -12,6 +32,7 @@ for(let i = 0; i < toScroll.length; i++) {
 }
 
 function scrollCheck() {
+    changeHeader();
     for(let i = 0; i < toScroll.length; i++) {
         if (toScroll[i].offsetTop <= document.documentElement.scrollTop + 0.8 * document.documentElement.clientHeight) {
             toScroll[i].classList.add('visible');
@@ -44,7 +65,7 @@ for (let i = 0; i < lists.length; i++) {
         });
     };
 
-    for (let i = 0; i < links.length - 1; i++) {
+    for (let i = 0; i < links.length; i++) {
         _loop(i);
     }
 }
@@ -239,28 +260,3 @@ if ($('.advantages').length) {
         _loop(i);
     }
 }
-//карусель-слайдер на странице услуги
-
-$(document).ready(function() {
-    if ($('.capabilities').length) {
-        let owl = $('.capabilities .owl-carousel');
-        if (owl.length) {
-            owl.owlCarousel({
-                items: 1,
-                margin: 25,
-                mouseDrag: false,
-                loop: true,
-                nav: false,
-                dots: false,
-            });
-
-            $('.capabilities__arrow_next').click(function () {
-                owl.trigger('next.owl.carousel');
-            });
-
-            $('.capabilities__arrow_prev').click(function () {
-                owl.trigger('prev.owl.carousel', [300]);
-            });
-        }
-    }
-});

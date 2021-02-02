@@ -7,10 +7,7 @@
     <title>Главная</title>
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="owlcarousel/owl.carousel.min.js"></script>
 </head>
 <body>
 <main class="page">
@@ -81,7 +78,6 @@
                 <li><a href="#">Условия</a></li>
                 <li><a href="#">Преимущества</a></li>
                 <li><a href="#">Выгода</a></li>
-                <li><a href="#">gfc-russia.ru</a></li>
             </ul>
         </nav>
         <div class="header__burger">
@@ -103,7 +99,6 @@
                         <li><a href="#">Условия</a></li>
                         <li><a href="#">Преимущества</a></li>
                         <li><a href="#">Выгода</a></li>
-                        <li><a href="#">gfc-russia.ru</a></li>
                     </ul>
                 </div>
             </div>
@@ -256,48 +251,66 @@
                 </div>
             </div>
         </section>
-        <section class="capabilities toScroll">
+        <section class="capabilities">
             <div class="container">
                 <h2 class="title">Возможности</h2>
-                <div class="capabilities__items">
-                    <div class="owl-carousel">
-                        <article class="capabilities__item">
+                <ul class="capabilities__items">
+                    <li class="capabilities__item">
+                        <input id="first" type="radio" name="capabilities" checked>
+                        <label for="first">
+                            • Быстрый и удобный поиск товара
+                            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.1709 0.499941C12.7159 0.0449414 11.9809 0.0449414 11.5259 0.499941L6.99928 5.02661L2.47262 0.499941C2.01762 0.0449409 1.28262 0.0449409 0.827615 0.499941C0.372615 0.954941 0.372615 1.68994 0.827615 2.14494L6.18262 7.49994C6.63762 7.95494 7.37262 7.95494 7.82762 7.49994L13.1826 2.14494C13.6259 1.70161 13.6259 0.954941 13.1709 0.499941Z"/>
+                            </svg>
+                        </label>
+                        <div class="capabilities__image">
                             <img src="img/capabilities/item1.png" alt="">
-                            <p>Быстрый и удобный поиск товара</p>
-                        </article>
-                        <article class="capabilities__item">
+                        </div>
+                    </li>
+                    <li class="capabilities__item">
+                        <input id="second" type="radio" name="capabilities">
+                        <label for="second">
+                            • Доступ ко всем ценовым предложениям на рынке
+                            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.1709 0.499941C12.7159 0.0449414 11.9809 0.0449414 11.5259 0.499941L6.99928 5.02661L2.47262 0.499941C2.01762 0.0449409 1.28262 0.0449409 0.827615 0.499941C0.372615 0.954941 0.372615 1.68994 0.827615 2.14494L6.18262 7.49994C6.63762 7.95494 7.37262 7.95494 7.82762 7.49994L13.1826 2.14494C13.6259 1.70161 13.6259 0.954941 13.1709 0.499941Z"/>
+                            </svg>
+                        </label>
+                        <div class="capabilities__image">
                             <img src="img/capabilities/item2.png" alt="">
-                            <p>Доступ ко всем ценовым предложениям на рынке</p>
-                        </article>
-                        <article class="capabilities__item">
+                        </div>
+                    </li>
+                    <li class="capabilities__item">
+                        <input id="third" type="radio" name="capabilities">
+                        <label for="third">
+                            • Вы получаете прямые цены от производителей вне зависимости от объема
+                            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.1709 0.499941C12.7159 0.0449414 11.9809 0.0449414 11.5259 0.499941L6.99928 5.02661L2.47262 0.499941C2.01762 0.0449409 1.28262 0.0449409 0.827615 0.499941C0.372615 0.954941 0.372615 1.68994 0.827615 2.14494L6.18262 7.49994C6.63762 7.95494 7.37262 7.95494 7.82762 7.49994L13.1826 2.14494C13.6259 1.70161 13.6259 0.954941 13.1709 0.499941Z"/>
+                            </svg>
+                        </label>
+                        <div class="capabilities__image">
                             <img src="img/capabilities/item3.png" alt="">
-                            <p>Вы получаете прямые цены от производителей вне зависимости от объема</p>
-                        </article>
-                        <article class="capabilities__item">
+                        </div>
+                    </li>
+                    <li class="capabilities__item">
+                        <input id="forth" type="radio" name="capabilities">
+                        <label for="forth">
+                            • Решение вопросов по заказу онлайн
+                            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.1709 0.499941C12.7159 0.0449414 11.9809 0.0449414 11.5259 0.499941L6.99928 5.02661L2.47262 0.499941C2.01762 0.0449409 1.28262 0.0449409 0.827615 0.499941C0.372615 0.954941 0.372615 1.68994 0.827615 2.14494L6.18262 7.49994C6.63762 7.95494 7.37262 7.95494 7.82762 7.49994L13.1826 2.14494C13.6259 1.70161 13.6259 0.954941 13.1709 0.499941Z"/>
+                            </svg>
+                        </label>
+                        <div class="capabilities__image">
                             <img src="img/capabilities/item4.png" alt="">
-                            <p>Решение вопросов по заказу онлайн</p>
-                        </article>
-                    </div>
-                    <div class="capabilities__arrow capabilities__arrow_prev">
-                        <img src="img/chevron_right.svg" alt="Назад">
-                    </div>
-                    <div class="capabilities__arrow capabilities__arrow_next">
-                        <img src="img/chevron_right.svg" alt="Вперед">
-                    </div>
-                </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </section>
     </div>
 <footer class="footer">
     <div class="container">
         <div class="footer__column">
-            <p class="footer__title">GFC-russia.ru</p>
             <p class="footer__content"><span>Адрес:</span> индекс&nbsp;123022, г.&nbsp;Москва, ул.&nbsp;Рочдельская, д.&nbsp;15, стр.&nbsp;16, помещение&nbsp;I, офис&nbsp;1</p>
-            <p class="footer__content">GFC в социальных сетях</p>
-            <div class="footer__links">
-                <a href="#" class="footer__link"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="footer__link"><i class="fab fa-facebook-f"></i></a>
-            </div>
         </div>
     </div>
 </footer></main>

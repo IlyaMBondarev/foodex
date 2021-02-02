@@ -709,8 +709,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .conditions {
-  background-color: #0073BA;
-  padding: 47px 0 93px;
+  background: url("../img/conditions-bg.jpg") 50% 87%/1920px no-repeat;
+  padding: 80px 0 93px;
+}
+@media (max-width: 767px) {
+  .conditions {
+    background: url("../img/conditions-bg.jpg") 50% 50%/cover no-repeat;
+  }
 }
 .conditions__title {
   font-size: 30px;
@@ -726,28 +731,29 @@ h1, h2, h3, h4, h5, h6 {
 }
 .conditions__block {
   position: relative;
-  margin-top: 67px;
+  margin-top: 110px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 @media (max-width: 767px) {
   .conditions__block {
     margin-top: 54px;
     flex-direction: column;
+    align-items: center;
   }
 }
 .conditions__item {
-  padding: 39px 30px;
+  padding: 0 30px 39px;
 }
 @media (max-width: 1200px) {
   .conditions__item {
-    padding: 39px 10px;
+    padding: 0 10px 39px;
   }
 }
 @media (max-width: 1023px) {
   .conditions__item {
-    padding: 39px 30px;
+    padding: 0 30px 39px;
   }
 }
 @media (max-width: 767px) {
@@ -755,7 +761,6 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid #ffffff;
     border-radius: 10px;
     filter: drop-shadow(0px 4px 31px rgba(0, 0, 0, 0.15));
-    margin-bottom: 76px;
     padding: 10px;
     min-height: 190px;
     width: 65%;
@@ -781,32 +786,71 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 18px;
   color: #ffffff;
 }
+.conditions__item_list li {
+  margin-bottom: 20px;
+}
 @media (max-width: 767px) {
   .conditions__item_list {
     margin-top: 10px;
   }
+  .conditions__item_list li {
+    margin-bottom: 10px;
+  }
 }
-.conditions__item_list li {
-  margin-bottom: 10px;
+.conditions__line {
+  position: relative;
+  margin: 0 150px;
+  width: 3px;
+  height: 200px;
+  background-color: #ffffff;
+}
+.conditions__line::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  transform: translate(-50%, 50%);
+  animation: 3s ease-in 0s infinite alternate upDown;
 }
 @media (max-width: 1023px) {
-  .conditions__image {
-    width: 197px;
+  .conditions__line {
+    margin: 0 50px;
   }
 }
 @media (max-width: 767px) {
-  .conditions__image {
-    position: absolute;
-    left: -25px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
+  .conditions__line {
+    width: 200px;
+    height: 3px;
+    margin: 50px 0;
+  }
+  .conditions__line::before {
+    left: 0;
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+    animation: 3s ease-in 0s infinite alternate leftRight;
   }
 }
-.conditions__image > img {
-  width: 100%;
-}
 
+@keyframes upDown {
+  0% {
+    bottom: 0;
+  }
+  100% {
+    bottom: 100%;
+  }
+}
+@keyframes leftRight {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 100%;
+  }
+}
 .advantages {
   padding-top: 200px;
 }

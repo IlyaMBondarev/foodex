@@ -3,21 +3,18 @@ document.querySelector('.page').classList.add('loaded');
 
 //замена шрифта шапки при скролле
 
-let header = document.querySelector('.header');
-let headerMenu = header.querySelector('.header__menu').querySelectorAll('a');
-let mainScreen = document.querySelector('.main-screen');
 let conditions = document.querySelector('.conditions');
+let conditionsLine = conditions.querySelector('.conditions__line');
+let conditionsCircle = conditionsLine.querySelector('span');
 
-function changeHeader() {
-    if (mainScreen.offsetTop + mainScreen.offsetHeight > document.documentElement.scrollTop + header.scrollHeight/2 ||
-        (conditions.offsetTop + conditions.offsetHeight > document.documentElement.scrollTop + header.scrollHeight/2 && conditions.offsetTop < document.documentElement.scrollTop + header.scrollHeight/2)) {
-        headerMenu.forEach(link => link.style.color = '#ffffff');
-    } else {
-        headerMenu.forEach(link => link.style.color = '#000000');
+function isRollingCircle() {
+    if (conditions.offsetTop + conditions.offsetHeight < document.documentElement.scrollTop + document.documentElement.offsetHeight
+        && document.documentElement.scrollWidth > 767) {
+        conditionsCircle.classList.add('running');
     }
 }
 
-changeHeader();
+isRollingCircle();
 
 //появление элементов при скролле
 
@@ -32,7 +29,7 @@ for(let i = 0; i < toScroll.length; i++) {
 }
 
 function scrollCheck() {
-    changeHeader();
+    isRollingCircle();
     for(let i = 0; i < toScroll.length; i++) {
         if (toScroll[i].offsetTop <= document.documentElement.scrollTop + 0.8 * document.documentElement.clientHeight) {
             toScroll[i].classList.add('visible');

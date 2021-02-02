@@ -414,7 +414,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 24px 0;
   width: 100%;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.4);
   transition: background 0.4s ease;
 }
 .header__row {
@@ -450,10 +450,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 .header__menu a {
-  font-family: "medium";
+  font-family: "semibold";
   font-size: 16px;
   letter-spacing: 0.11em;
-  color: #ffffff;
+  color: #000000;
   transition: color 0.4s ease;
 }
 @media (max-width: 1000px) {
@@ -762,6 +762,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
     filter: drop-shadow(0px 4px 31px rgba(0, 0, 0, 0.15));
     padding: 10px;
+    margin-bottom: 70px;
     min-height: 190px;
     width: 65%;
     min-width: 290px;
@@ -804,17 +805,19 @@ h1, h2, h3, h4, h5, h6 {
   height: 200px;
   background-color: #ffffff;
 }
-.conditions__line::before {
-  content: "";
+.conditions__line > span {
+  display: block;
   position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: 100%;
   width: 20px;
   height: 20px;
   border-radius: 50%;
   background-color: #ffffff;
   transform: translate(-50%, 50%);
-  animation: 3s ease-in 0s infinite alternate upDown;
+}
+.conditions__line > span.running {
+  animation: 2s linear 0s 1 forwards upDown;
 }
 @media (max-width: 1023px) {
   .conditions__line {
@@ -823,32 +826,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media (max-width: 767px) {
   .conditions__line {
-    width: 200px;
-    height: 3px;
-    margin: 50px 0;
-  }
-  .conditions__line::before {
-    left: 0;
-    bottom: 50%;
-    transform: translate(-50%, 50%);
-    animation: 3s ease-in 0s infinite alternate leftRight;
+    display: none;
   }
 }
 
 @keyframes upDown {
   0% {
-    bottom: 0;
-  }
-  100% {
     bottom: 100%;
   }
-}
-@keyframes leftRight {
-  0% {
-    left: 0;
-  }
   100% {
-    left: 100%;
+    bottom: 0;
   }
 }
 .advantages {
@@ -1162,7 +1149,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media (max-width: 1023px) {
   .capabilities__items {
-    padding-right: 400px;
+    padding-right: 420px;
   }
 }
 @media (max-width: 767px) {
@@ -1251,16 +1238,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 .capabilities__image {
   position: absolute;
-  top: 50%;
+  bottom: 0;
   right: 0;
   width: 630px;
   opacity: 0;
-  transform: translateY(-50%);
   transition: all 0.5s linear;
 }
 @media (max-width: 1023px) {
   .capabilities__image {
     width: 400px;
+    bottom: 20%;
   }
 }
 @media (max-width: 767px) {

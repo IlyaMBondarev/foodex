@@ -709,22 +709,48 @@ h1, h2, h3, h4, h5, h6 {
 
 .conditions {
   background: url("../img/conditions-bg.jpg") 50% 87%/1920px no-repeat;
-  padding: 80px 0 93px;
+  padding: 45px 0;
 }
 @media (max-width: 767px) {
   .conditions {
     background: url("../img/conditions-bg-mob.jpg") 50% 50%/cover no-repeat;
   }
 }
+.conditions__main {
+  position: relative;
+  overflow: hidden;
+  padding: 40px 0 100px;
+}
+.conditions__main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: rgba(255, 255, 255, 0.8);
+  filter: blur(31px);
+}
+@media (max-width: 767px) {
+  .conditions__main {
+    padding: 10px 0 10px;
+  }
+  .conditions__main::before {
+    display: none;
+  }
+}
 .conditions__title {
+  position: relative;
   font-size: 30px;
   line-height: 135%;
-  color: #ffffff;
+  color: #000000;
   text-align: center;
 }
 @media (max-width: 767px) {
   .conditions__title {
-    color: #000000;
     font-family: "semibold";
     font-size: 24px;
   }
@@ -795,25 +821,19 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "medium";
   font-size: 20px;
   margin-bottom: 20px;
-  color: #ffffff;
-}
-@media (max-width: 767px) {
-  .conditions__item_title {
-    color: #000000;
-  }
+  color: #000000;
 }
 .conditions__item_list {
   position: relative;
   font-family: "medium";
   font-size: 18px;
-  color: #ffffff;
+  color: #000000;
 }
 .conditions__item_list li {
   margin-bottom: 20px;
 }
 @media (max-width: 767px) {
   .conditions__item_list {
-    color: #000000;
     margin-top: 10px;
   }
   .conditions__item_list li {
@@ -825,7 +845,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 150px;
   width: 3px;
   height: 200px;
-  background-color: #ffffff;
+  background-color: #0073BA;
 }
 .conditions__line > span {
   display: block;
@@ -835,7 +855,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: #0073BA;
   transform: translate(-50%, 50%);
 }
 .conditions__line > span.running {

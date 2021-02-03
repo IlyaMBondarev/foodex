@@ -1175,6 +1175,8 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 60px;
   padding-bottom: 60px;
   width: 100%;
+}
+.capabilities > .container {
   display: flex;
   flex-direction: column;
   align-items: center;

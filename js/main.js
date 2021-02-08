@@ -212,7 +212,7 @@ if ($('.benefit').length) {
 
 //двигающиеся блоки
 
-
+/*
 if ($('.advantages').length) {
     let items = document.querySelector('.advantages').querySelectorAll('.advantages__item');
 
@@ -257,3 +257,5 @@ if ($('.advantages').length) {
         _loop(i);
     }
 }
+
+*/

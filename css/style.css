@@ -414,7 +414,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 24px 0;
   width: 100%;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.6);
   transition: background 0.4s ease;
 }
 .header__row {
@@ -710,6 +710,11 @@ h1, h2, h3, h4, h5, h6 {
   background: url("../img/conditions-bg.jpg") 50% 87%/1920px no-repeat;
   padding: 45px 0;
   margin-top: 200px;
+}
+@media (min-width: 1920.00001px) {
+  .conditions {
+    background: url("../img/conditions-bg.jpg") 50% 87%/cover no-repeat;
+  }
 }
 @media (max-width: 767px) {
   .conditions {

@@ -8,28 +8,19 @@ let conditionsLine = conditions.querySelector('.conditions__line');
 let conditionsCircle = conditionsLine.querySelector('span');
 
 function isRollingCircle() {
-    if (conditions.offsetTop + conditions.offsetHeight < document.documentElement.scrollTop + document.documentElement.offsetHeight
-        && document.documentElement.scrollWidth > 767) {
+    if (conditions.offsetTop <= document.documentElement.scrollTop && document.documentElement.scrollWidth > 767) {
         conditionsCircle.classList.add('running');
     }
 }
 
-isRollingCircle();
-
-//появление элементов при скролле
-
-let burgerInput = document.getElementById('burger');
-let lists = document.querySelector('.header').querySelectorAll('ul');
-let toScroll = document.querySelectorAll('.toScroll');
-
-for(let i = 0; i < toScroll.length; i++) {
-    if (toScroll[i].offsetTop > document.documentElement.scrollTop + 0.8 * document.documentElement.clientHeight) {
-        toScroll[i].classList.add('hidden');
+function showBlocks(i) {
+    for (let j = i; j >= 0; j--) {
+        toScroll[j].classList.add('visible');
+        toScroll[j].classList.remove('hidden');
     }
 }
 
-function scrollCheck() {
-    isRollingCircle();
+function showCurrentBlock() {
     for(let i = 0; i < toScroll.length; i++) {
         if (toScroll[i].offsetTop <= document.documentElement.scrollTop + 0.8 * document.documentElement.clientHeight) {
             toScroll[i].classList.add('visible');
@@ -38,7 +29,43 @@ function scrollCheck() {
     }
 }
 
-window.addEventListener('scroll', scrollCheck);
+//появление элементов при скролле
+
+let burgerInput = document.getElementById('burger');
+let lists = document.querySelector('.header').querySelectorAll('ul');
+let toScroll = document.querySelectorAll('.toScroll');
+let indexOfCurrentBlock = 0;
+
+for(let i = 0; i < toScroll.length; i++) {
+    if (toScroll[i].offsetTop > document.documentElement.scrollTop + 0.8 * document.documentElement.clientHeight) {
+        toScroll[i].classList.add('hidden');
+    }
+    if (toScroll[i].offsetTop <= document.documentElement.scrollTop) {
+        indexOfCurrentBlock = i;
+    }
+}
+
+toScroll[indexOfCurrentBlock].scrollIntoView({
+    behavior: 'smooth'
+});
+
+isRollingCircle();
+
+window.addEventListener('scroll', showCurrentBlock);
+
+window.addEventListener('mousewheel', function (event) {
+    if (event.deltaY > 0 && indexOfCurrentBlock + 1 !== toScroll.length) {
+        toScroll[++indexOfCurrentBlock].scrollIntoView({
+            behavior: 'smooth'
+        });
+    } else if (event.deltaY < 0 && indexOfCurrentBlock !== 0) {
+        toScroll[--indexOfCurrentBlock].scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+    isRollingCircle();
+    showBlocks();
+});
 
 //скролл при нажатии на пункт меню
 
@@ -46,26 +73,40 @@ function closeBurger() {
     burgerInput.checked = false;
 }
 
+let _loop = function _loop(links, i) {
+    links[i].addEventListener('click', function (event) {
+        event.preventDefault();
+
+        if (toScroll[i+1]) {
+            indexOfCurrentBlock = i+1;
+            toScroll[indexOfCurrentBlock].scrollIntoView({
+                behavior: 'smooth'
+            });
+            closeBurger();
+            isRollingCircle();
+            showBlocks(indexOfCurrentBlock);
+        }
+    });
+};
+
 for (let i = 0; i < lists.length; i++) {
     let links = lists[i].querySelectorAll('a');
 
-    let _loop = function _loop(i) {
-        links[i].addEventListener('click', function (event) {
-            event.preventDefault();
-
-            if (toScroll[i]) {
-                toScroll[i].scrollIntoView({
-                    behavior: 'smooth'
-                });
-                closeBurger();
-            }
-        });
-    };
-
     for (let i = 0; i < links.length; i++) {
-        _loop(i);
+        _loop(links, i);
     }
 }
+
+let logo = document.querySelector('.header__logo').querySelector('a');
+
+logo.addEventListener('click', function (event) {
+    event.preventDefault();
+    indexOfCurrentBlock = 0;
+    toScroll[indexOfCurrentBlock].scrollIntoView({
+        behavior: 'smooth'
+    });
+    closeBurger();
+})
 
 //форма
 

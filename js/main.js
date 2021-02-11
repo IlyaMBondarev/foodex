@@ -45,23 +45,48 @@ for(let i = 0; i < toScroll.length; i++) {
     }
 }
 
-toScroll[indexOfCurrentBlock].scrollIntoView({
-    behavior: 'smooth'
-});
-
+if (document.documentElement.scrollWidth >= 1025) {
+    toScroll[indexOfCurrentBlock].scrollIntoView({
+        behavior: 'smooth'
+    });
+}
 isRollingCircle();
 
 window.addEventListener('scroll', showCurrentBlock);
 
 window.addEventListener('mousewheel', function (event) {
-    if (event.deltaY > 0 && indexOfCurrentBlock + 1 !== toScroll.length) {
-        toScroll[++indexOfCurrentBlock].scrollIntoView({
-            behavior: 'smooth'
-        });
-    } else if (event.deltaY < 0 && indexOfCurrentBlock !== 0) {
-        toScroll[--indexOfCurrentBlock].scrollIntoView({
-            behavior: 'smooth'
-        });
+    console.log(event);
+    if (document.documentElement.scrollWidth >= 1025) {
+        if (event.deltaY > 0) {
+            if (document.documentElement.scrollTop + document.documentElement.offsetHeight >= toScroll[indexOfCurrentBlock].offsetTop + toScroll[indexOfCurrentBlock].offsetHeight) {
+                if (toScroll[indexOfCurrentBlock+1]) {
+                    toScroll[++indexOfCurrentBlock].scrollIntoView({
+                        block: 'start',
+                        behavior: 'smooth'
+                    });
+                    console.log(indexOfCurrentBlock);
+                }
+            } else {
+                toScroll[indexOfCurrentBlock].scrollIntoView({
+                    block: 'end',
+                    behavior: 'smooth'
+                });
+            }
+        } else if (event.deltaY < 0) {
+            if (document.documentElement.scrollTop <= toScroll[indexOfCurrentBlock].offsetTop) {
+                if (toScroll[indexOfCurrentBlock-1]) {
+                    toScroll[--indexOfCurrentBlock].scrollIntoView({
+                        block: 'end',
+                        behavior: 'smooth'
+                    });
+                }
+            } else {
+                toScroll[indexOfCurrentBlock].scrollIntoView({
+                    block: 'start',
+                    behavior: 'smooth'
+                });
+            }
+        }
     }
     isRollingCircle();
     showBlocks();

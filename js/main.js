@@ -57,7 +57,8 @@ window.addEventListener('scroll', showCurrentBlock);
 window.addEventListener('mousewheel', function (event) {
     console.log(event);
     if (document.documentElement.scrollWidth >= 1025) {
-        if (event.deltaY > 0) {
+        if (event.deltaY > 0 || event.wheelDelta < 0) {
+            console.log(document.documentElement.scrollTop + document.documentElement.offsetHeight, toScroll[indexOfCurrentBlock].offsetTop + toScroll[indexOfCurrentBlock].offsetHeight);
             if (document.documentElement.scrollTop + document.documentElement.offsetHeight >= toScroll[indexOfCurrentBlock].offsetTop + toScroll[indexOfCurrentBlock].offsetHeight) {
                 if (toScroll[indexOfCurrentBlock+1]) {
                     toScroll[++indexOfCurrentBlock].scrollIntoView({
@@ -67,18 +68,26 @@ window.addEventListener('mousewheel', function (event) {
                     console.log(indexOfCurrentBlock);
                 }
             } else {
-                toScroll[indexOfCurrentBlock].scrollIntoView({
-                    block: 'end',
-                    behavior: 'smooth'
-                });
-            }
-        } else if (event.deltaY < 0) {
-            if (document.documentElement.scrollTop <= toScroll[indexOfCurrentBlock].offsetTop) {
-                if (toScroll[indexOfCurrentBlock-1]) {
-                    toScroll[--indexOfCurrentBlock].scrollIntoView({
+                if (!(event.deltaY)) {
+                    toScroll[indexOfCurrentBlock].scrollIntoView(false);
+                } else {
+                    toScroll[indexOfCurrentBlock].scrollIntoView({
                         block: 'end',
                         behavior: 'smooth'
                     });
+                }
+            }
+        } else if (event.deltaY < 0 || event.wheelDelta > 0) {
+            if (document.documentElement.scrollTop <= toScroll[indexOfCurrentBlock].offsetTop) {
+                if (toScroll[indexOfCurrentBlock-1]) {
+                    if (!(event.deltaY)) {
+                        toScroll[--indexOfCurrentBlock].scrollIntoView(false);
+                    } else {
+                        toScroll[--indexOfCurrentBlock].scrollIntoView({
+                            block: 'end',
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             } else {
                 toScroll[indexOfCurrentBlock].scrollIntoView({

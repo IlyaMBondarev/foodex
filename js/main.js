@@ -10,9 +10,11 @@ function showBlocks(i) {
 
 function showCurrentBlock() {
     if (document.documentElement.scrollTop !== 0) {
+        header.style.background = 'rgba(255,255,255,0.5)';
         changingColorBlock.style.color = "#000000";
         changingColorBlock.querySelector('svg > *').style.fill = "#000000";
     } else {
+        header.style.background = '';
         changingColorBlock.style.color = "#ffffff";
         changingColorBlock.querySelector('svg > *').style.fill = "#ffffff";
     }
@@ -32,6 +34,7 @@ let toScroll = document.querySelectorAll('.toScroll');
 let indexOfCurrentBlock = 0;
 
 let changingColorBlock = document.querySelector('.header__right');
+let header = document.querySelector('.header');
 
 for(let i = 0; i < toScroll.length; i++) {
     if (toScroll[i].offsetTop > document.documentElement.scrollTop + 0.8 * document.documentElement.clientHeight) {

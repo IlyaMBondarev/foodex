@@ -1,6 +1,18 @@
 
 document.querySelector('.page').classList.add('loaded');
 
+//замена шрифта шапки при скролле
+
+let conditions = document.querySelector('.conditions');
+let conditionsLine = conditions.querySelector('.conditions__line');
+let conditionsCircle = conditionsLine.querySelector('span');
+
+function isRollingCircle() {
+    if (conditions.offsetTop <= document.documentElement.scrollTop && document.documentElement.scrollWidth > 767) {
+        conditionsCircle.classList.add('running');
+    }
+}
+
 function showBlocks(i) {
     for (let j = i; j >= 0; j--) {
         toScroll[j].classList.add('visible');
@@ -9,15 +21,6 @@ function showBlocks(i) {
 }
 
 function showCurrentBlock() {
-    if (document.documentElement.scrollTop !== 0) {
-        header.style.background = 'rgba(255,255,255,0.5)';
-        changingColorBlock.style.color = "#000000";
-        changingColorBlock.querySelector('svg > *').style.fill = "#000000";
-    } else {
-        header.style.background = '';
-        changingColorBlock.style.color = "#ffffff";
-        changingColorBlock.querySelector('svg > *').style.fill = "#ffffff";
-    }
     for(let i = 0; i < toScroll.length; i++) {
         if (toScroll[i].offsetTop <= document.documentElement.scrollTop + 0.8 * document.documentElement.clientHeight) {
             toScroll[i].classList.add('visible');
@@ -33,9 +36,6 @@ let lists = document.querySelector('.header').querySelectorAll('ul');
 let toScroll = document.querySelectorAll('.toScroll');
 let indexOfCurrentBlock = 0;
 
-let changingColorBlock = document.querySelector('.header__right');
-let header = document.querySelector('.header');
-
 for(let i = 0; i < toScroll.length; i++) {
     if (toScroll[i].offsetTop > document.documentElement.scrollTop + 0.8 * document.documentElement.clientHeight) {
         toScroll[i].classList.add('hidden');
@@ -50,13 +50,14 @@ if (document.documentElement.scrollWidth >= 1025) {
         behavior: 'smooth'
     });
 }
+isRollingCircle();
 
 window.addEventListener('scroll', showCurrentBlock);
 
 window.addEventListener('mousewheel', function (event) {
     if (document.documentElement.scrollWidth >= 1025) {
         if (event.deltaY > 0 || event.wheelDelta < 0) {
-            if (document.documentElement.scrollTop + document.documentElement.offsetHeight + 1 >= toScroll[indexOfCurrentBlock].offsetTop + toScroll[indexOfCurrentBlock].offsetHeight) {
+            if (document.documentElement.scrollTop + document.documentElement.offsetHeight >= toScroll[indexOfCurrentBlock].offsetTop + toScroll[indexOfCurrentBlock].offsetHeight) {
                 if (toScroll[indexOfCurrentBlock+1]) {
                     toScroll[++indexOfCurrentBlock].scrollIntoView({
                         block: 'start',
@@ -93,11 +94,11 @@ window.addEventListener('mousewheel', function (event) {
             }
         }
     }
+    isRollingCircle();
     showBlocks();
 });
 
 //скролл при нажатии на пункт меню
-
 
 function closeBurger() {
     burgerInput.checked = false;
@@ -107,12 +108,13 @@ let _loop = function _loop(links, i) {
     links[i].addEventListener('click', function (event) {
         event.preventDefault();
 
-        if (toScroll[i]) {
-            indexOfCurrentBlock = i;
+        if (toScroll[i+1]) {
+            indexOfCurrentBlock = i+1;
             toScroll[indexOfCurrentBlock].scrollIntoView({
                 behavior: 'smooth'
             });
             closeBurger();
+            isRollingCircle();
             showBlocks(indexOfCurrentBlock);
         }
     });
@@ -125,6 +127,17 @@ for (let i = 0; i < lists.length; i++) {
         _loop(links, i);
     }
 }
+
+let logo = document.querySelector('.header__logo').querySelector('a');
+
+logo.addEventListener('click', function (event) {
+    event.preventDefault();
+    indexOfCurrentBlock = 0;
+    toScroll[indexOfCurrentBlock].scrollIntoView({
+        behavior: 'smooth'
+    });
+    closeBurger();
+})
 
 //форма
 
@@ -235,92 +248,86 @@ if ($('.popup-callback-bg').length) {
     }
 }
 
-// ягоды
+//переворачивающиеся блоки
 
-let berriesBlock = document.querySelector('.berries');
-let sources = ['blackberry','blackcurrant','blueberry','cherry','raspberry','strawberry','blackberry2','blackcurrant2','raspberry2']
 
-setTimeout(function () {
-    let srcLeft = Math.floor(Math.random()*sources.length);
-    let srcRight = Math.floor(Math.random()*sources.length);
-    let left = document.createElement('img');
-    left.classList.add('berry');
-    left.classList.add('berry-left');
-    left.src = 'img/berries/' + sources[srcLeft] + '.png';
-    left.alt = '';
-    let right = document.createElement('img');
-    right.classList.add('berry');
-    right.classList.add('berry-right');
-    right.src = 'img/berries/' + sources[srcRight] + '.png';
-    right.alt = '';
-    berriesBlock.appendChild(left);
-    left.style.animation = '5.2s linear 0s 1 forwards flyDown, 5.2s linear 0s infinite forwards rotating';
-    berriesBlock.appendChild(right);
-    right.style.animation = '5.2s linear 2.4s 1 forwards flyDown, 5.2s linear 2.4s infinite forwards rotating';
-    setInterval(function () {
-        let newSrcLeft = Math.floor(Math.random()*sources.length);
-        let newSrcRight = Math.floor(Math.random()*sources.length);
-        left.style.opacity = '0';
-        right.style.opacity = '0';
-        setTimeout(function() {
-            left.src = 'img/berries/' + sources[newSrcLeft] + '.png';
-            right.src = 'img/berries/' + sources[newSrcRight] + '.png';
-            left.style.opacity = '';
-            right.style.opacity = '';
-        },1050)
-    }, 5000)
-}, 4000)
+if ($('.benefit').length) {
+    let rotatingBlocksParent = document.querySelector('.benefit');
+    let rotatingBlocks = rotatingBlocksParent.querySelectorAll('.benefit__item');
 
-//карусель-слайдер на странице услуги
+    let _loop = function _loop(i) {
+        rotatingBlocks[i].addEventListener('click', function () {
+            rotatingBlocks[i].classList.add('benefit__item-active');
+        });
+    };
 
-$(document).ready(function() {
-    if ($('.advantages').length) {
-        let owlImages = $('.advantages .advantages__slider.owl-carousel');
-        if (owlImages.length) {
-            owlImages.owlCarousel({
-                items: 1,
-                mouseDrag: false,
-                touchDrag: false,
-                autoplay: true,
-                autoplayTimeout: 5000,
-                autoplaySpeed: 1000,
-                loop: true,
-                nav: false,
-                dots: false,
-            });
+    for (let i = 0; i < rotatingBlocks.length; i++) {
+        _loop(i);
+    }
+
+    document.addEventListener('click', function (event) {
+        let isOnBlocks = false;
+
+        for (let _i = 0; _i < rotatingBlocks.length; _i++) {
+            if (rotatingBlocks[_i].contains(event.target) || rotatingBlocks[_i] === event.target) {
+                isOnBlocks = true;
+            }
         }
 
-        $('.advantages__next-button').click(function() {
-            owlImages.trigger('next.owl.carousel');
-            owlImages.trigger('stop.owl.autoplay');
-            owlImages.data('owl.carousel').settings.autoplay = false;
-            owlImages.data('owl.carousel').options.autoplay = false;
-            owlImages.trigger('refresh.owl.carousel');
-            setTimeout(() => {
-                owlImages.trigger('play.owl.autoplay');
-                owlImages.data('owl.carousel').settings.autoplay = true;
-                owlImages.data('owl.carousel').options.autoplay = true;
-                owlImages.trigger('refresh.owl.carousel');
-            },100)
-        });
+        if (!isOnBlocks) {
+            for (let _i2 = 0; _i2 < rotatingBlocks.length; _i2++) {
+                rotatingBlocks[_i2].classList.remove('benefit__item-active');
+            }
+        }
+    });
+}
 
-        let owlImagesSlider = document.querySelector('.advantages').querySelector('.advantages__block');
-        let fullList = document.querySelector('.advantages').querySelector('.advantages__full-list');
-        let showButton = $('.advantages__show-list-button');
-        let hideButton = $('.advantages__hide-list-button');
-        showButton.click(function() {
-            owlImagesSlider.style.maxHeight = '0';
-            owlImagesSlider.style.minHeight = '0';
-            fullList.style.maxHeight = fullList.scrollHeight + 'px';
-            showButton.css({'display': 'none'});
-            hideButton.css({'display': 'block'});
-        })
-        hideButton.click(function() {
-            owlImagesSlider.style.maxHeight = '';
-            owlImagesSlider.style.minHeight = '';
-            fullList.style.maxHeight = '';
-            showButton.css({'display': 'block'});
-            hideButton.css({'display': 'none'});
-        })
+//двигающиеся блоки
+
+/*
+if ($('.advantages').length) {
+    let items = document.querySelector('.advantages').querySelectorAll('.advantages__item');
+
+    let _loop = function _loop(i) {
+        let image = items[i].querySelector('img');
+        let x = void 0,
+            y = void 0;
+        items[i].addEventListener('mouseenter', function (event) {
+            let heightOfItem = items[i].offsetHeight;
+            let widthOfItem = items[i].offsetWidth;
+            let xPossible = (image.scrollWidth - widthOfItem) / 2;
+            let yPossible = (image.scrollHeight - heightOfItem) / 2;
+
+            if (document.documentElement.scrollWidth > 767) {
+                x = event.pageX - items[i].offsetLeft;
+                y = event.pageY - items[i].offsetTop;
+                image.style.transform = "translate(-50%,-50%) translate(".concat((widthOfItem / 2 - x) * xPossible / (widthOfItem / 2), "px,").concat((heightOfItem / 2 - y) * yPossible / (heightOfItem / 2), "px)");
+                setTimeout(function () {
+                    image.style.transition = 'transform 0.05s ease';
+                }, 200);
+            }
+        });
+        items[i].addEventListener('mousemove', function (event) {
+            let heightOfItem = items[i].offsetHeight;
+            let widthOfItem = items[i].offsetWidth;
+            let xPossible = (image.scrollWidth - widthOfItem) / 2;
+            let yPossible = (image.scrollHeight - heightOfItem) / 2;
+
+            if (document.documentElement.scrollWidth > 767) {
+                x = event.pageX - items[i].offsetLeft;
+                y = event.pageY - items[i].offsetTop;
+                image.style.transform = "translate(-50%,-50%) translate(".concat((widthOfItem / 2 - x) * xPossible / (widthOfItem / 2), "px,").concat((heightOfItem / 2 - y) * yPossible / (heightOfItem / 2), "px)");
+            }
+        });
+        items[i].addEventListener('mouseleave', function () {
+            image.style.transition = 'transform 0.2s ease';
+            image.style.transform = 'translate(-50%,-50%)';
+        });
+    };
+
+    for (let i = 0; i < items.length; i++) {
+        _loop(i);
     }
-});
+}
+
+*/

@@ -240,7 +240,7 @@ if ($('.popup-callback-bg').length) {
 let berriesBlock = document.querySelector('.berries');
 let sources = ['blackberry','blackcurrant','blueberry','cherry','raspberry','strawberry','blackberry2','blackcurrant2','raspberry2']
 
-setInterval(function () {
+setTimeout(function () {
     let srcLeft = Math.floor(Math.random()*sources.length);
     let srcRight = Math.floor(Math.random()*sources.length);
     let left = document.createElement('img');
@@ -254,15 +254,21 @@ setInterval(function () {
     right.src = 'img/berries/' + sources[srcRight] + '.png';
     right.alt = '';
     berriesBlock.appendChild(left);
-    left.style.animation = '5.2s linear 0s 1 forwards flyDown';
+    left.style.animation = '5.2s linear 0s 1 forwards flyDown, 5.2s linear 0s infinite forwards rotating';
     berriesBlock.appendChild(right);
-    right.style.animation = '5.2s linear 2.4s 1 forwards flyDown';
-    setTimeout(function () {
-        left.parentNode.removeChild(left);
-    }, 5850)
-    setTimeout(function () {
-        right.parentNode.removeChild(right);
-    }, 8450)
+    right.style.animation = '5.2s linear 2.4s 1 forwards flyDown, 5.2s linear 2.4s infinite forwards rotating';
+    setInterval(function () {
+        let newSrcLeft = Math.floor(Math.random()*sources.length);
+        let newSrcRight = Math.floor(Math.random()*sources.length);
+        left.style.opacity = '0';
+        right.style.opacity = '0';
+        setTimeout(function() {
+            left.src = 'img/berries/' + sources[newSrcLeft] + '.png';
+            right.src = 'img/berries/' + sources[newSrcRight] + '.png';
+            left.style.opacity = '';
+            right.style.opacity = '';
+        },1050)
+    }, 5000)
 }, 4000)
 
 //карусель-слайдер на странице услуги
